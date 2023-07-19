@@ -1,6 +1,6 @@
 public class NBody {
 
-    public static final String Background = "images\\starfield.jpg";
+    private static final String Background = "images\\starfield.jpg";
     private static double T;
     private static double dt;
     private static String file;
