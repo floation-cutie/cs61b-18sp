@@ -3,7 +3,7 @@
  * @author floation_cutie
  * @param
  */
-public class Body {
+public class Planet {
     /* to reduce the chance of typos */
     public double xxPos; // : Its current x position
     public double yyPos; // : Its current y position
@@ -13,7 +13,7 @@ public class Body {
     public String imgFileName;
     public final double G = 6.67e-11;
 
-    public Body(double xP, double yP, double xV,
+    public Planet(double xP, double yP, double xV,
             double yV, double m, String img) {
         xxPos = xP;
         yyPos = yP;
@@ -24,7 +24,7 @@ public class Body {
     }
 
     /* About copy a object,there are two ways: swallow copy and deep copy */
-    public Body(Body b) {
+    public Planet(Planet b) {
         this.xxPos = b.xxPos;
         this.yyPos = b.yyPos;
         this.xxVel = b.xxVel;
@@ -33,7 +33,7 @@ public class Body {
         this.imgFileName = b.imgFileName;
     }
 
-    public double calcDistance(Body b2) {
+    public double calcDistance(Planet b2) {
         double distance;
         double dx = b2.xxPos - this.xxPos;
         double dy = b2.yyPos - this.yyPos;
@@ -41,28 +41,28 @@ public class Body {
         return distance;
     }
 
-    public double calcForceExertedBy(Body b2) {
+    public double calcForceExertedBy(Planet b2) {
         double dis = this.calcDistance(b2);
         return (G * this.mass * b2.mass / (dis * dis));
     }
 
-    public double calcForceExertedByX(Body b2) {
+    public double calcForceExertedByX(Planet b2) {
         double dx = b2.xxPos - this.xxPos;
         double dis = this.calcDistance(b2);
         double Force = this.calcForceExertedBy(b2);
         return (Force * dx / dis);
     }
 
-    public double calcForceExertedByY(Body b2) {
+    public double calcForceExertedByY(Planet b2) {
         double dy = b2.yyPos - this.yyPos;
         double dis = this.calcDistance(b2);
         double Force = this.calcForceExertedBy(b2);
         return (Force * dy / dis);
     }
 
-    public double calcNetForceExertedByX(Body[] b_all) {
+    public double calcNetForceExertedByX(Planet[] b_all) {
         double NetForceExertedByX = 0;
-        for (Body b_item : b_all) {
+        for (Planet b_item : b_all) {
             if (!this.equals(b_item)) {
                 NetForceExertedByX += this.calcForceExertedByX(b_item);
             }
@@ -70,9 +70,9 @@ public class Body {
         return NetForceExertedByX;
     }
 
-    public double calcNetForceExertedByY(Body[] b_all) {
+    public double calcNetForceExertedByY(Planet[] b_all) {
         double NetForceExertedByY = 0;
-        for (Body b_item : b_all) {
+        for (Planet b_item : b_all) {
             if (!this.equals(b_item)) {
                 NetForceExertedByY += this.calcForceExertedByY(b_item);
             }

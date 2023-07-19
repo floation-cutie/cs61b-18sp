@@ -14,10 +14,10 @@ public class NBody {
         return radius;
     }
 
-    public static Body[] readBodies(String s) {
+    public static Planet[] readPlanets(String s) {
         In in = new In(s);
         int num = in.readInt();
-        Body[] all_bodies = new Body[num];
+        Planet[] all_bodies = new Planet[num];
         in.readDouble();
         for (int i = 0; i < num; i++) {
             double xxPos = in.readDouble();
@@ -26,7 +26,7 @@ public class NBody {
             double yyVel = in.readDouble();
             double mass = in.readDouble();
             String imgFileName = in.readString();
-            all_bodies[i] = new Body(xxPos, yyPos, xxVel, yyVel, mass, imgFileName);
+            all_bodies[i] = new Planet(xxPos, yyPos, xxVel, yyVel, mass, imgFileName);
         }
         in.close();
         return all_bodies;
@@ -39,7 +39,7 @@ public class NBody {
         dt = Double.parseDouble(args[1]);
         file = args[2];
         universe_radius = readRadius(file);
-        Body[] allBodies = readBodies(file);
+        Planet[] allBodies = readPlanets(file);
 
         /* Drawing the Background */
         StdDraw.enableDoubleBuffering();
@@ -50,7 +50,7 @@ public class NBody {
 
         /* dont let the background cover up the objects aka planets */
 
-        for (Body planet : allBodies) {
+        for (Planet planet : allBodies) {
             planet.draw();
         }
         StdDraw.show();
@@ -69,7 +69,7 @@ public class NBody {
                 allBodies[i].update(dt, xForces[i], yForces[i]);
             }
             StdDraw.picture(0, 0, Background, 2 * universe_radius, 2 * universe_radius);
-            for (Body planet : allBodies) {
+            for (Planet planet : allBodies) {
                 planet.draw();
             }
             StdDraw.show();
