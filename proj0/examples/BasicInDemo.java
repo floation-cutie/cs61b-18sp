@@ -3,9 +3,11 @@ public class BasicInDemo {
 	public static void main(String[] args) {
 		In in = new In("BasicInDemo_input_file.txt");
 
-		/* Every time you call a read method from the In class,
+		/*
+		 * Every time you call a read method from the In class,
 		 * it reads the next thing from the file, assuming it is
-		 * of the specified type. */
+		 * of the specified type.
+		 */
 
 		/* Compare the calls below to the contents of BasicInDemo_input_file.txt */
 
@@ -15,8 +17,8 @@ public class BasicInDemo {
 		String fourthItemInFile = in.readString();
 		double fifthItemInFile = in.readDouble();
 
-		System.out.println("The file contained "  + firstItemInFile + ", " + 
-			               secondItemInFile + ", " + thirdItemInFile + ", " +
-			               fourthItemInFile + ", and " + fifthItemInFile);
+		System.out.println("The file contained " + firstItemInFile + ", " +
+				secondItemInFile + ", " + thirdItemInFile + ", " +
+				fourthItemInFile + ", and " + fifthItemInFile);
 	}
-} 
+}
