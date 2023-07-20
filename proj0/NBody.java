@@ -33,7 +33,6 @@ public class NBody {
     }
 
     public static void main(String[] args) {
-
         /* Collecting All Needed Input */
         T = Double.parseDouble(args[0]);
         dt = Double.parseDouble(args[1]);
