@@ -80,14 +80,15 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        markFront = plusOne(markFront);
-        T tmp = arrayList[markFront];
-        arrayList[markFront] = null;
-        size--;
         double usageRatio = 1.0 * size / totalSize;
         if (usageRatio < 0.25 && totalSize >= 16) {
             resize(totalSize / REFACTOR);
         }
+        markFront = plusOne(markFront);
+        T tmp = arrayList[markFront];
+        arrayList[markFront] = null;
+        size--;
+
         return tmp;
     }
 
