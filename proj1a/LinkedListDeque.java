@@ -35,7 +35,7 @@ public class LinkedListDeque<T> {
      *         first: to create an empty list,then addLast by iterative ways
      *         we can use <T> in the beginning instead of casting
      *         we don't need to change the size at first!s
-     */
+     *
     public LinkedListDeque(LinkedListDeque other) {
 
         sentinel = new TNode(null);
@@ -44,7 +44,7 @@ public class LinkedListDeque<T> {
         for (int i = 0; i < size; i++) {
             addLast((T) other.get(i));
         }
-    }
+    }*/
 
     public int size() {
         return size;

@@ -18,16 +18,16 @@ public class ArrayDeque<T> {
         size = 0;
     }
 
-    public ArrayDeque(ArrayDeque other) {
-        size = other.size;
-        totalSize = other.totalSize;
-        markEnd = other.markEnd;
-        markFront = other.markFront;
-        arrayList = (T[]) new Object[totalSize];
-        for (int i = 0; i < totalSize; i++) {
-            arrayList[i] = (T) other.arrayList[i];
-        }
-    }
+    // public ArrayDeque(ArrayDeque other) {
+    // size = other.size;
+    // totalSize = other.totalSize;
+    // markEnd = other.markEnd;
+    // markFront = other.markFront;
+    // arrayList = (T[]) new Object[totalSize];
+    // for (int i = 0; i < totalSize; i++) {
+    // arrayList[i] = (T) other.arrayList[i];
+    // }
+    // }
 
     /**
      * this method below helps us to calculate the previous index value
@@ -80,13 +80,14 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
+        markFront = plusOne(markFront);
+        T tmp = arrayList[markFront];
+        arrayList[markFront] = null;
+        size--;
         double usageRatio = 1.0 * size / totalSize;
         if (usageRatio < 0.25 && totalSize >= 16) {
             resize(totalSize / REFACTOR);
         }
-        markFront = plusOne(markFront);
-        T tmp = arrayList[markFront];
-        size--;
         return tmp;
     }
 
@@ -94,13 +95,14 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
+        markEnd = minusOne(markEnd);
+        T tmp = arrayList[markEnd];
+        arrayList[markEnd] = null;
+        size--;
         double usageRatio = 1.0 * size / totalSize;
         if (usageRatio < 0.25 && totalSize >= 16) {
             resize(totalSize / REFACTOR);
         }
-        markEnd = minusOne(markEnd);
-        T tmp = arrayList[markEnd];
-        size--;
         return tmp;
     }
 
@@ -123,11 +125,7 @@ public class ArrayDeque<T> {
         if (index > size - 1) {
             return null;
         }
-        int target = markFront;
-        for (int i = 0; i <= index; i++) {
-            target = plusOne(target);
-        }
-        return arrayList[target];
+        return arrayList[(index + markFront + 1) % totalSize];
     }
 
     /**
@@ -138,22 +136,15 @@ public class ArrayDeque<T> {
      * @param tarSize
      */
     private void resize(int tarSize) {
-        if (tarSize > totalSize) {
-            T[] a = (T[]) new Object[tarSize];
-            System.arraycopy(arrayList, 0, a, 0, totalSize);
-            arrayList = a;
-            totalSize = tarSize;
-        } else {
-            int head = markFront;
-            T[] a = (T[]) new Object[tarSize];
-            for (int i = 0; i < size; i++) {
-                head = plusOne(head);
-                a[i] = arrayList[head];
-            }
-            arrayList = a;
-            totalSize = tarSize;
-            markFront = minusOne(0);
-            markEnd = size;
+        T[] a = (T[]) new Object[tarSize];
+        int head = markFront;
+        for (int i = 0; i < size; i++) {
+            head = plusOne(head);
+            a[i] = arrayList[head];
         }
+        arrayList = a;
+        totalSize = tarSize;
+        markFront = minusOne(0);
+        markEnd = size;
     }
 }
