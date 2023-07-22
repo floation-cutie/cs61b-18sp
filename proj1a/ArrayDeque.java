@@ -80,15 +80,14 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        double usageRatio = 1.0 * size / totalSize;
-        if (usageRatio < 0.25 && totalSize >= 16) {
-            resize(totalSize / REFACTOR);
-        }
         markFront = plusOne(markFront);
         T tmp = arrayList[markFront];
         arrayList[markFront] = null;
         size--;
-
+        double usageRatio = 1.0 * size / totalSize;
+        if (usageRatio < 0.25 && totalSize >= 16) {
+            resize(totalSize / REFACTOR);
+        }
         return tmp;
     }
 
@@ -133,7 +132,7 @@ public class ArrayDeque<T> {
      * in the decrement resize,we rewrite own "arraycopy" and set the member
      * appropriately.
      * and should be removed private
-     * 
+     * don't simply arraycopy the origin array,we need to reassign the array index...
      * @param tarSize
      */
     private void resize(int tarSize) {
