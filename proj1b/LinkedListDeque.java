@@ -51,10 +51,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         return size;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return (size == 0);
-    }
 
     @Override
     /* a little awkward here */
@@ -164,3 +160,4 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 }
+
