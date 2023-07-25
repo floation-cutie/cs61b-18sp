@@ -12,8 +12,31 @@ public class IntListTest {
 
     @Test
     public void testReverse() {
+
+        /* test if reverse properly */
         IntList L = IntList.of(1, 2, 3);
-        assertEquals(IntList.of(3, 2, 1), IntList.reverse(L));
+        IntList exp = IntList.of(3, 2, 1);
+        assertEquals(exp, IntList.reverse(L));
+
+        IntList L1 = IntList.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        IntList exp1 = IntList.of(9, 8, 7, 6, 5, 4, 3, 2, 1);
+        assertEquals(exp1, IntList.reverse(L1));
+
+        IntList L2 = IntList.of(1);
+        IntList exp2 = IntList.of(1);
+        assertEquals(exp2, IntList.reverse(L2));
+
+        IntList L3 = IntList.of(1, 2);
+        IntList exp3 = IntList.of(2, 1);
+        assertEquals(exp3, IntList.reverse(L3));
+
+
+        /* test null input*/
+        assertEquals(null, IntList.reverse(null));
+
+        /* test if implemented destructively */
+        assertNotEquals(IntList.of(1, 2, 3), L);
+
     }
 
     @Test

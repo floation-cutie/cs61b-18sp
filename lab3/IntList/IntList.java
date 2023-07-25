@@ -46,7 +46,9 @@ public class IntList {
             A = A.rest;
             ans = new IntList(A.first, ans);
         }
-        return ans;
+        A.first = ans.first;
+        A.rest = ans.rest;
+        return A;
     }
     /**
      * A List with null rest, and first = 0.
