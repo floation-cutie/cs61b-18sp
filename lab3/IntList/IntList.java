@@ -38,17 +38,13 @@ public class IntList {
      * as an input, returns null.
      */
     public static IntList reverse(IntList A) {
-        if (A == null) {
-            return null;
+        if (A == null || A.rest == null) {
+            return A;
         }
-        IntList ans = new IntList(A.first, null);
-        while (A.rest != null) {
-            A = A.rest;
-            ans = new IntList(A.first, ans);
-        }
-        A.first = ans.first;
-        A.rest = ans.rest;
-        return A;
+        IntList reversed = reverse(A.rest);
+        A.rest.rest = A;
+        A.rest = null;
+        return reversed;
     }
     /**
      * A List with null rest, and first = 0.
