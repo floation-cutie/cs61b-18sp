@@ -75,7 +75,6 @@ public class ArrayDeque<T> implements Deque<T> {
         return size;
     }
 
-
     @Override
     public T removeFirst() {
         if (isEmpty()) {
@@ -138,7 +137,9 @@ public class ArrayDeque<T> implements Deque<T> {
      * in the decrement resize,we rewrite own "arraycopy" and set the member
      * appropriately.
      * and should be removed private
-     * don't simply arraycopy the origin array,we need to reassign the array index...
+     * don't simply arraycopy the origin array,we need to reassign the array
+     * index...
+     * 
      * @param tarSize
      */
     private void resize(int tarSize) {

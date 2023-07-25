@@ -36,21 +36,21 @@ public class LinkedListDeque<T> implements Deque<T> {
      *         we can use <T> in the beginning instead of casting
      *         we don't need to change the size at first!s
      *
-    public LinkedListDeque(LinkedListDeque other) {
-
-        sentinel = new TNode(null);
-        sentinel.next = sentinel;
-        sentinel.prev = sentinel;
-        for (int i = 0; i < size; i++) {
-            addLast((T) other.get(i));
-        }
-    }*/
+     *         public LinkedListDeque(LinkedListDeque other) {
+     * 
+     *         sentinel = new TNode(null);
+     *         sentinel.next = sentinel;
+     *         sentinel.prev = sentinel;
+     *         for (int i = 0; i < size; i++) {
+     *         addLast((T) other.get(i));
+     *         }
+     *         }
+     */
 
     @Override
     public int size() {
         return size;
     }
-
 
     @Override
     /* a little awkward here */
@@ -160,4 +160,3 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 }
-
