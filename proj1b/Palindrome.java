@@ -26,10 +26,10 @@ public class Palindrome {
         if (a != b) {
             return false;
         }
-        return isPalindrome(DequeToWord(D));
+        return isPalindrome(dequeToWord(D));
     }
 
-    private String DequeToWord(Deque<Character> D) {
+    private String dequeToWord(Deque<Character> D) {
         String ans = "";
         while (!D.isEmpty()) {
             ans += D.removeFirst();
@@ -50,6 +50,6 @@ public class Palindrome {
         if (!cc.equalChars(a, b)) {
             return false;
         }
-        return isPalindrome(DequeToWord(D), cc);
+        return isPalindrome(dequeToWord(D), cc);
     }
 }
