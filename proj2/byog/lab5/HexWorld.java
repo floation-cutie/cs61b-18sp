@@ -17,7 +17,7 @@ public class HexWorld {
     private static final int WIDTH = 11 * size - 6; // 3 * longest line + 2 * shortest line: 3 * ((size - 1) * 2 + size) + 2 * size
     private static final int HEIGHT = 10 * size;    // 5 * size is the height of the huge hexagon
 
-    private static final long SEED = 1356;
+    private static final long SEED = 123356;
 
     /**
      * instantiate a random class for use
@@ -75,6 +75,40 @@ public class HexWorld {
         }
     }
 
+    public static void drawHexWorld(TETile[][] world, position p, TETile t) {
+
+        if (size < 2) {
+            throw new IllegalArgumentException("Hexagon must be at least size 2.");
+        }
+        int curRow = p.y;
+        int lastRow = curRow;
+        int curColumn = p.x;
+        int reverseCurrColumn = WIDTH - 2 * (size - 1);
+        int rowInterval = 2 * size;
+        int columnInterval = 2 * size - 1;
+        for (int num = 3; num < 6; num += 1) {
+            for (int i = 0; i < num; i++) {
+//                if (num == 5) {
+//                    position curPos = new position(curColumn, curRow);
+//                    t = randomTileType();
+//                    addSingleHexagon(world, curPos, size, t);
+//                    curRow += rowInterval;
+//                    continue;
+//                }
+                position curPos = new position(curColumn, curRow);
+                position revCurPos = new position(reverseCurrColumn, curRow);
+                t = randomTileType();
+                addSingleHexagon(world, curPos, size, t);
+                t = randomTileType();
+                addSingleHexagon(world, revCurPos, size, t);
+                curRow += rowInterval;
+            }
+            curRow = lastRow - size;
+            lastRow = curRow;
+            curColumn += columnInterval;
+            reverseCurrColumn -= columnInterval;
+        }
+    }
     private static TETile randomTileType() {
         int randomNum = RANDOM.nextInt(9);
         switch (randomNum) {
@@ -101,16 +135,16 @@ public class HexWorld {
     public static void main(String [] args) {
         TERenderer ter = new TERenderer();
 
-        ter.initialize(WIDTH + 2, HEIGHT + 2);
-        TETile[][] hexagonTiles = new TETile[WIDTH + 2][HEIGHT + 2];
+        ter.initialize(WIDTH + 4, HEIGHT + 4);
+        TETile[][] hexagonTiles = new TETile[WIDTH + 4][HEIGHT + 4];
         TETile randomT = randomTileType();
-        position startPos = new position(2, 0);
-        for (int x = 0; x < WIDTH + 2; x += 1) {
-            for (int y = 0; y < HEIGHT + 2; y += 1) {
+        position startPos = new position(size, 2 * size);
+        for (int x = 0; x < WIDTH + 4; x += 1) {
+            for (int y = 0; y < HEIGHT + 4; y += 1) {
                 hexagonTiles[x][y] = Tileset.NOTHING;
             }
         }
-        addSingleHexagon(hexagonTiles, startPos, size, randomT);
+        drawHexWorld(hexagonTiles, startPos, randomT);
         ter.renderFrame(hexagonTiles);
     }
 }
