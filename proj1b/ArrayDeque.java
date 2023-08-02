@@ -1,8 +1,10 @@
+import java.util.Iterator;
+
 /**
  * We want to stimulate a circular array list and implement the Deque API on it.
  */
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T> , Iterable<T> {
     private int size;
     private int totalSize;
     private int markFront;
@@ -154,4 +156,28 @@ public class ArrayDeque<T> implements Deque<T> {
         markFront = minusOne(0);
         markEnd = size;
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new myDequeIterator();
+    }
+    private class myDequeIterator implements Iterator<T> {
+
+        private int wizPos;
+        private myDequeIterator() {
+            wizPos = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return wizPos < size;
+        }
+
+        @Override
+        public T next() {
+            T returnItem = arrayList[wizPos];
+            wizPos += 1;
+            return returnItem;
+        }
+    }
+
 }
