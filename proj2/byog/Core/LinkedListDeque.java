@@ -1,3 +1,5 @@
+package byog.Core;
+
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Iterable<T>{
@@ -163,7 +165,7 @@ public class LinkedListDeque<T> implements Iterable<T>{
         int i;
         for (i = 0; i < size; i++) {
             tmp = tmp.next;
-            if (tmp.val == o) {
+            if (tmp.val.equals(o)) {
                 tmp.prev.next = tmp.next;
                 tmp.next.prev = tmp.prev;
                 tmp = null;
@@ -171,7 +173,7 @@ public class LinkedListDeque<T> implements Iterable<T>{
             }
         }
         if (i == size) {
-            System.out.println("no such element");
+            System.out.println("no such position");
         }
         size--;
     }

@@ -122,14 +122,18 @@ public class LinkedListDequeTest {
 		assertEquals(1, result);
 	}
 
+
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 		//addIsEmptySizeTest();
 		//addRemoveTest();
 		LinkedListDeque<Integer> input = new LinkedListDeque<>();
-		input.addFirst(1);
-		input.addFirst(2);
+
 		input.addLast(3);
+		input.addLast(4);
 		input.printDeque();
+		for (Integer item: input ) {
+			System.out.print(item);
+		}
 	}
 }
