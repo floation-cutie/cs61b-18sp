@@ -28,6 +28,7 @@ public class CountingSort {
 
         // when we're dealing with ints, we can just put each value
         // count number of times into the new array
+        // 没有保证其稳定性与通用性
         int[] sorted = new int[arr.length];
         int k = 0;
         for (int i = 0; i < counts.length; i += 1) {
@@ -54,7 +55,7 @@ public class CountingSort {
         }
 
         // return the sorted array
-        return sorted;
+        return sorted2;
     }
 
     /**
@@ -67,6 +68,31 @@ public class CountingSort {
      */
     public static int[] betterCountingSort(int[] arr) {
         // TODO make counting sort work with arrays containing negative numbers.
-        return null;
+        // 进行偏移,计数排序有两种可行的实现思路，记录start位或end位
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int i : arr) {
+            min = Math.min(min,i);
+            max = Math.max(max,i);
+        }
+        final int OFFSET = - min;
+        int[] starts = new int[max - min + 1];
+        for (int i : arr) {
+            starts[i + OFFSET]++;
+        }
+        int pos = 0;
+        for (int i = 0; i < starts.length; i++) {
+            int tmp = starts[i];
+            starts[i] = pos;
+            pos += tmp;
+        }
+
+        int[] sorted = new int[arr.length];
+        for (int item : arr) {
+            int place = starts[item + OFFSET];
+            sorted[place] = item;
+            starts[item + OFFSET]++;
+        }
+        return sorted;
     }
 }

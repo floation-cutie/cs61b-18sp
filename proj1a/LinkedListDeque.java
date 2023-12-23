@@ -172,6 +172,7 @@ public class LinkedListDeque<T> implements Iterable<T>{
         }
         if (i == size) {
             System.out.println("no such element");
+            return;
         }
         size--;
     }

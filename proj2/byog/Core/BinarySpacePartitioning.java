@@ -5,7 +5,7 @@ import byog.TileEngine.Tileset;
 
 import java.util.Random;
 public class BinarySpacePartitioning{
-    private Random r = new Random(123);
+    private Random r = new Random(138);
 
     /**
      * one implement is to from the center of the room to find other room
@@ -101,7 +101,7 @@ public class BinarySpacePartitioning{
                         splitHorizontally(minHeight, curRoom, splitRoom);
                     } else if (curRoom.width >= 2 * minWidth) {
                         splitVertically(minWidth,curRoom, splitRoom);
-                    } else if (r.nextDouble() < 0.7f){
+                    } else if (r.nextDouble() < 0.8f){
                         roomList.addLast(curRoom);
                     }
                 } else {
@@ -109,7 +109,7 @@ public class BinarySpacePartitioning{
                         splitVertically(minWidth,curRoom, splitRoom);
                     } else if (curRoom.height >= 2 * minHeight) {
                         splitHorizontally(minHeight, curRoom, splitRoom);
-                    } else if (r.nextDouble() < 0.7f){
+                    } else if (r.nextDouble() < 0.8f){
                         roomList.addLast(curRoom);
                     }
                 }
