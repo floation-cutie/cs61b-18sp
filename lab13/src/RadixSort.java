@@ -15,6 +15,8 @@ public class RadixSort {
      *
      * @return String[] the sorted array
      */
+
+    // How to speed up!!!!
     public static String[] sort(String[] asciis) {
         // TODO: Implement LSD Sort
         int max_length = 0;
@@ -49,14 +51,20 @@ public class RadixSort {
             // 当捕捉到StringOutOfBound 异常时，进行操作
             String s = asciis[i];
             int ch_index;
-            try {
-                ch_index = (int) s.charAt(index);
-            }catch (StringIndexOutOfBoundsException e) {
+//            try {
+//                ch_index = (int) s.charAt(index);
+//            }catch (StringIndexOutOfBoundsException e) {
+//                ch_index = 0;
+//            }
+            if (index >= s.length()) {
                 ch_index = 0;
+            } else {
+                ch_index = (int) s.charAt(index);
             }
             recordIndex[i] = ch_index;
             start[ch_index]++;
         }
+
         int pos = 0;
         for (int i = 0; i < start.length; i++) {
             int tmp = start[i];
@@ -83,6 +91,19 @@ public class RadixSort {
         strings = sort(strings);
         for (String string : strings) {
             System.out.println(string);
+        }
+        String[] asciis = new String[] { "56", "112", "94", "4", "9", "82", "394", "80" };
+        String[] res = RadixSort.sort(asciis);
+        for (String s : res) {
+            System.out.println(s + " ");
+        }
+
+        System.out.println();
+
+        String[] asciis2 = new String[] {"  ", "      ", "    ", " "};
+        String[] res2 = RadixSort.sort(asciis2);
+        for (String s : res2) {
+            System.out.println(s + ",");
         }
     }
     /**
