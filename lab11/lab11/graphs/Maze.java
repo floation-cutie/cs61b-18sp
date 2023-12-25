@@ -68,6 +68,7 @@ public class Maze implements Observer {
     /**
      * Returns x coordinate for given vertex.
      * For example if N = 10, and V = 12, returns 2.
+     * start from 0 to N * N - 1
      */
     public int toX(int v) {
         return v % N + 1;
@@ -262,6 +263,7 @@ public class Maze implements Observer {
     // generate the maze starting from lower left
     private void generateSingleGapMaze() {
         boolean[][] marked = new boolean[N + 2][N + 2];
+        // 边界
         for (int x = 0; x < N + 2; x++) {
             marked[x][0] = marked[x][N + 1] = true;
         }
